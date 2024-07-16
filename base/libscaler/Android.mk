@@ -17,6 +17,7 @@ include $(CLEAR_VARS)
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libexynosutils libexynosv4l2
+LOCAL_HEADER_LIBRARIES := libcutils_headers libsystem_headers libhardware_headers libexynos_headers
 
 LOCAL_C_INCLUDES := \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
@@ -40,6 +41,10 @@ LOCAL_CFLAGS += -DSCALER_USE_PREMUL_FMT
 endif
 
 LOCAL_MODULE := libexynosscaler
+
+ifeq ($(BOARD_USES_VENDORIMAGE), true)
+    LOCAL_PROPRIETARY_MODULE := true
+endif
 
 include $(TOP)/hardware/samsung_slsi/exynos/BoardConfigCFlags.mk
 include $(BUILD_SHARED_LIBRARY)

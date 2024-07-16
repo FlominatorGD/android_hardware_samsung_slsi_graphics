@@ -22,7 +22,9 @@ LOCAL_SRC_FILES:= \
 
 LOCAL_MODULE := libion_exynos
 
+LOCAL_PROPRIETARY_MODULE := true
+
 LOCAL_MODULE_TAGS := optional
 
-include $(TOP)/hardware/samsung_slsi/exynos/BoardConfigCFlags.mk
+include $(TOP)/hardware/samsung_slsi/graphics/base/BoardConfigCFlags.mk
 include $(BUILD_SHARED_LIBRARY)

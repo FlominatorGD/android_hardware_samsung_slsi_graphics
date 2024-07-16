@@ -23,8 +23,6 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../include \
 	$(TOP)/hardware/samsung_slsi/exynos/include \
 	$(TOP)/hardware/samsung_slsi/exynos/libexynosutils \
-	$(TOP)/hardware/samsung_slsi/exynos3/include \
-	$(TOP)/hardware/samsung_slsi/exynos4/include \
 	$(TOP)/hardware/samsung_slsi/exynos5/include
 
 LOCAL_ADDITIONAL_DEPENDENCIES := \
@@ -32,12 +30,14 @@ LOCAL_ADDITIONAL_DEPENDENCIES := \
 
 LOCAL_SRC_FILES := MppFactory.cpp
 LOCAL_MODULE := libmpp
+LOCAL_PROPRIETARY_MODULE := true
 
 ifeq ($(BOARD_USES_FIMC), true)
 LOCAL_SHARED_LIBRARIES += libexynosfimc
 else
 LOCAL_SHARED_LIBRARIES += libexynosgscaler
 endif
+
 
 include $(TOP)/hardware/samsung_slsi/exynos/BoardConfigCFlags.mk
 include $(BUILD_SHARED_LIBRARY)

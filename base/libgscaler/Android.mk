@@ -17,17 +17,19 @@ include $(CLEAR_VARS)
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libexynosutils libexynosv4l2 libexynosscaler
+LOCAL_HEADER_LIBRARIES := libcutils_headers libsystem_headers libhardware_headers libexynos_headers
 
 # to talk to secure side
 # LOCAL_SHARED_LIBRARIES += libMcClient
 # LOCAL_STATIC_LIBRARIES := libsecurepath
+
 
 LOCAL_C_INCLUDES := \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
 	$(LOCAL_PATH)/../include \
 	$(TOP)/hardware/samsung_slsi/exynos5/include \
 	$(TOP)/hardware/samsung_slsi/exynos/libexynosutils \
-	$(TOP)/hardware/samsung_slsi/exynos/libmpp
+	$(TOP)/hardware/samsung_slsi/graphics/libmpp
 
 LOCAL_ADDITIONAL_DEPENDENCIES += \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
@@ -38,5 +40,9 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE := libexynosgscaler
 
-include $(TOP)/hardware/samsung_slsi/exynos/BoardConfigCFlags.mk
+ifeq ($(BOARD_USES_VENDORIMAGE), true)
+    LOCAL_PROPRIETARY_MODULE := true
+endif
+
+include $(TOP)/hardware/samsung_slsi/graphics/base/BoardConfigCFlags.mk
 include $(BUILD_SHARED_LIBRARY)
