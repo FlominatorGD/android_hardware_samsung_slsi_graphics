@@ -37,7 +37,7 @@
 #endif
 #include "ExynosDisplayResourceManagerModule.h"
 #else
-#include <decon-fb.h>
+#include <s3c-fb.h>
 #endif
 
 #include <EGL/egl.h>
