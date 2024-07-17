@@ -26,13 +26,15 @@ build_dirs +=  \
 endif
 
 ifdef BOARD_HWC_VERSION
-build_dirs += $(BOARD_HWC_VERSION)
+    build_dirs += $(BOARD_HWC_VERSION)
 else
-ifeq ($(BOARD_HWC_VERSION), libhwc1_legacy)
-build_dirs += libhwc1_legacy
-else
-build_dirs += libhwc1
-endif
+    ifeq ($(BOARD_HWC_VERSION), libhwc1_tiny)
+        build_dirs += libhwc1_tiny
+    else ifeq ($(BOARD_HWC_VERSION), libhwc1_legacy)
+        build_dirs += libhwc1_legacy
+    else
+        build_dirs += libhwc1
+    endif
 endif
 
 include $(call all-named-subdir-makefiles,$(build_dirs))
